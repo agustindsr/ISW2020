@@ -80,5 +80,76 @@
 
       </div>
     </section>
-</body>
+
+    <script>
+        function section1(){
+            const $element = document.querySelector('#section1');
+            $element.scrollIntoView({ behavior: 'smooth'})
+        }
+        function section2(){
+            const $element = document.querySelector('#section2');
+            $element.scrollIntoView({ behavior: 'smooth'})
+        }
+        function section3(){
+            const $element = document.querySelector('#section3');
+            $element.scrollIntoView({ behavior: 'smooth'})
+        }
+      const callback = (entries, options) => {
+        entries.forEach((item) => {
+          if (item.isIntersecting) {
+          
+              item.target.setAttribute("data-target", "in");
+           
+          } 
+          else {
+            item.target.setAttribute("data-target", "out");
+          }
+        });
+      };
+      const options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1,
+      };
+      const $h2 = document.querySelectorAll(".contenedor h2");
+      const $h3 = document.querySelectorAll(".contenedor h3");
+      const $p = document.querySelectorAll(".contenedor p");
+      const $a = document.querySelectorAll(".contenedor a");
+      const $section = document.querySelectorAll("section");
+
+      const observer = new IntersectionObserver(callback, options);
+      $h2.forEach((item) => observer.observe(item));
+      $h3.forEach((item) => observer.observe(item));
+      $p.forEach((item) => observer.observe(item));
+      $a.forEach((item) => observer.observe(item));
+
+
+      const optionsSection = {
+        root: null,
+        rootMargin: "0px",
+        threshold: .5,
+      };
+      function goto(element){
+        element.scrollIntoView({behavior: 'smooth'});
+        console.log('se llamo con',element)
+      }
+      const callbackSection = (entries, options) =>{
+        entries.forEach((item) => {
+          if (item.isIntersecting) {
+          
+              item.target.setAttribute("data-target", "in");
+              console.log(item.target)
+            //   goto(item.target);
+          } 
+          else {
+            item.target.setAttribute("data-target", "out");
+          };
+        })
+      }
+       
+      const observerSection = new IntersectionObserver(callbackSection, optionsSection);
+      $section.forEach((item) => observerSection.observe(item));
+
+    </script>
+  </body>
 </html>
